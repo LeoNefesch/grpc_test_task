@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package testtask;
+
+import "google/protobuf/timestamp.proto";
+
+message Data {
+    double decimal1 = 1;
+    double decimal2 = 2;
+    double decimal3 = 3;
+    double decimal4 = 4;
+    google.protobuf.Timestamp timestamp = 5;
+}
+
+message Packet {
+    google.protobuf.Timestamp packet_timestamp = 1;
+    int32 packet_seq_num = 2;
+    int32 n_records = 3;
+    repeated Data packet_data = 4;
+}
+
+service TestTaskService {
+    rpc SendPacket(Packet) returns (Response);
+}
+
+message Response {
+    string message = 1;
+}
